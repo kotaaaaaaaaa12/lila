@@ -1,0 +1,47 @@
+# Only application build inputs enter the disposable source mount.
+# This visible file works even when a web upload omits the root .dockerignore.
+**
+!build.sbt
+!lila.sh
+!package.json
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
+!.node-version
+!.sbtopts.default
+!.scalafmt.conf
+!LICENSE
+!COPYING.md
+!README.md
+!app/
+!app/**
+!bin/
+!bin/**
+!conf/
+!conf/**
+!modules/
+!modules/**
+!project/
+!project/**
+!translation/
+!translation/**
+!ui/
+!ui/**
+!public/
+!public/**
+!cloudflare/
+!cloudflare/**
+**/.git
+**/node_modules
+**/target
+**/.bloop
+**/.bsp
+**/.metals
+**/.dry-run
+**/.wrangler
+**/.dev.vars*
+**/.env
+**/.env.*
+**/*.zip
+**/*.log
+# Optional large models are omitted; the build fetches reviewed NNUE networks.
+public/lifat
