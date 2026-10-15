@@ -2,6 +2,7 @@ import {Container, ContainerProxy} from '@cloudflare/containers';
 import {loadBackup, publishBackup, publicRequest} from './persistence.mjs';
 import {SnapshotPublisher} from './snapshot.mjs';
 import {waitForStartup, startupResponse, fetchWithRetry} from './readiness.mjs';
+import {startupPage} from './startup-page.mjs';
 
 export {ContainerProxy};
 const RELEASE = 'lichess-cloudflare-r2-20261014-v1';
@@ -259,7 +260,7 @@ LichessServer.outboundByHost = {
 
 function starting(request, stage) {
   if (request.method !== 'GET' || !request.headers.get('accept')?.includes('text/html')) return startupResponse(stage, RELEASE);
-  return new Response(`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Starting Chess</title><style>html{color-scheme:dark light;font:16px system-ui}body{max-width:34rem;margin:18vh auto;padding:2rem}h1{font-size:2rem}p{line-height:1.6;color:gray}code{font-size:.85rem}</style><h1>Starting Chess</h1><p>The server is waking up and restoring its saved data. This page will reload when it is ready.</p><p id="status">Please wait.</p><script>async function check(){try{const r=await fetch('/healthz',{cache:'no-store'});const s=await r.json();if(s.ready){location.reload();return;}document.getElementById('status').textContent=s.error||s.stage;if(s.stage==='stopped'||s.stage==='idle'||s.stage==='container-error'||s.stage==='failed'){location.reload();return;}}catch{}setTimeout(check,3000)}check();</script></html>`, {
+  return new Response(startupPage(stage), {
     headers: {'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'retry-after': '5'},
   });
 }
