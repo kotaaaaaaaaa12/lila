@@ -19,8 +19,19 @@ RUN curl --fail --location --retry 5 \
 ENV PATH="/opt/sbt/bin:${PATH}"
 
 WORKDIR /build/lila
-COPY . .
-RUN python3 cloudflare/build-prepare.py
+# Copy source inputs explicitly so host dependencies and Git objects stay outside the build.
+COPY build.sbt lila.sh package.json pnpm-lock.yaml pnpm-workspace.yaml .node-version .sbtopts.default .scalafmt.conf LICENSE COPYING.md README.md ./
+COPY app/ ./app/
+COPY bin/ ./bin/
+COPY conf/ ./conf/
+COPY modules/ ./modules/
+COPY project/ ./project/
+COPY translation/ ./translation/
+COPY ui/ ./ui/
+COPY public/ ./public/
+COPY cloudflare/ ./cloudflare/
+RUN find . -name node_modules -prune -exec rm -rf {} + \
+    && python3 cloudflare/build-prepare.py
 RUN --mount=type=cache,target=/root/.cache/coursier \
     --mount=type=cache,target=/root/.sbt \
     ./lila.sh -Depoll=true stage
@@ -31,11 +42,13 @@ RUN git init /build/browser-data \
     && git -C /build/browser-data fetch --depth 1 origin ${LILA_REV} \
     && git -C /build/browser-data checkout --detach FETCH_HEAD \
     && git -C /build/browser-data lfs pull --include='public/lifat/nnue/*' \
+    && mkdir -p /build/lila/public/lifat/nnue \
     && cp -a /build/browser-data/public/lifat/nnue/. /build/lila/public/lifat/nnue/
 
 
 RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
-    pnpm install --frozen-lockfile && ./ui/build --no-install -p
+    pnpm install --frozen-lockfile \
+    && GIT_DIR=/build/browser-data/.git ./ui/build --no-install -p
 RUN test -f public/compiled/manifest.json \
     && test -x target/universal/stage/bin/lila
 
