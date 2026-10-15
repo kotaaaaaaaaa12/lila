@@ -5,7 +5,7 @@ import {waitForStartup, startupResponse, fetchWithRetry} from './readiness.mjs';
 import {startupPage} from './startup-page.mjs';
 
 export {ContainerProxy};
-const RELEASE = 'lichess-cloudflare-r2-20261014-v1';
+const RELEASE = 'lichess-cloudflare-e4de08f-20261016-v6';
 const INSTANCE = 'primary-v1';
 
 export class LichessServer extends Container {

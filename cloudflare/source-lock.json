@@ -1,10 +1,10 @@
 {
-  "lila": "2b8dbf48b958cbec6207818abc9c08b1d949b184",
+  "lila": "e4de08fdf77453ff7ab2d039113b931730826af5",
   "lila_ws": "89b1e88eba547d2602746e83f3c80765149ff23a",
   "lila_fishnet": "bce5d1fddbad02174eb9f7bb9b68e6c57c5cadef",
   "reviewed_files": {
     "package.json": "f41a0d3e673315cbec92da4c969b83d5794c80498961b85463beb29efba5acfa",
-    "pnpm-lock.yaml": "fc6809b2786d8bbe3fd165ebb5ecdea424d5c04145ea015a428cbfb18d3989fe",
+    "pnpm-lock.yaml": "bad589ea2472ffcd28ab1f7503862f978516a9649992a5a430d6d284352b95c6",
     "build.sbt": "cf79e651e618114b58f6a2675201d763325dc4fb84ae8a992a187946e4e9ec18",
     "project/BuildSettings.scala": "504c5eea033645e541b3d1b5edcb0d84688c0b9f1de90ecc9e2642efef05e66e",
     "project/build.properties": "bfd375a2714acd417f17bf18c09b3dc6536d7c6044c31e0bfdc5e8e7f4f2b60a",
@@ -12,8 +12,9 @@
     "conf/base.conf": "69de6896f94791d96d03b2e0ec6110889d30057495c87e3f8aba46eb36d124c1",
     "modules/security/src/main/SecurityForm.scala": "48a0d663d97edb56bad551c39045ca86f61f899e86e47a4a26292838673adc88",
     "modules/security/src/main/Signup.scala": "a57fcaf4fa6094c53a3bd947d0bb17307ed498cf1d83890368f6153dd4f76c2b",
-    "app/controllers/Auth.scala": "3f5cebdebcc7d2dc9929ea65da2a4c1cc49d5c1e64f0589d358029cefa770664",
+    "app/controllers/Auth.scala": "99849d684e5e6aef735abe53d53ba6abc97fff3e128286042a4b127b09a27913",
     "modules/web/src/main/ui/AuthUi.scala": "fca1ebf7dccd73453dc76d355359f93c66c3301a718d44703e041561a51e2a36",
     "pnpm-workspace.yaml": "b9e5f0a36793ec014c891155b9220658a8bc116e52c13b2b5c384ea106952667"
-  }
+  },
+  "lila_date": "2026-10-15T20:39:28Z"
 }

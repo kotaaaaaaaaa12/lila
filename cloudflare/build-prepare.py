@@ -92,7 +92,9 @@ replace(ui_name,
 
 # A real version resource prevents missing or recursive configuration includes.
 (root / 'conf/version.conf').write_text(
-    f'app.version.commit = "{lock["lila"]}"\napp.version.date = "2026-10-14T07:45:56Z"\n')
+    f'app.version.commit = "{lock["lila"]}"\napp.version.date = "{lock["lila_date"]}"\n')
+# Leave memory for native compiler allocations and the build environment.
 (root / '.sbtopts').write_text(
-    '-J-Xms128m\n-J-Xmx8g\n-J-Xss2m\n-J-XX:ReservedCodeCacheSize=384m\n-Dsbt.banner=false\n')
+    '-J-Xms128m\n-J-Xmx4g\n-J-Xss2m\n-J-XX:ReservedCodeCacheSize=384m\n'
+    '-J-XX:ActiveProcessorCount=2\n-Dsbt.banner=false\n')
 print('Reviewed source validated; local account patches and build configuration prepared.')

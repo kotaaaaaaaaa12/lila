@@ -19,7 +19,7 @@ RUN curl --fail --location --retry 5 \
     && tar -xzf /tmp/sbt.tgz -C /opt && rm /tmp/sbt.tgz
 ENV PATH="/opt/sbt/bin:${PATH}"
 
-ARG LILA_REV=2b8dbf48b958cbec6207818abc9c08b1d949b184
+ARG LILA_REV=e4de08fdf77453ff7ab2d039113b931730826af5
 ARG LILA_WS_REV=89b1e88eba547d2602746e83f3c80765149ff23a
 ARG LILA_FISHNET_REV=bce5d1fddbad02174eb9f7bb9b68e6c57c5cadef
 WORKDIR /build/lila
