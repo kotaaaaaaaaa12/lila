@@ -45,3 +45,4 @@
 **/*.log
 # Optional large models are omitted; the build fetches reviewed NNUE networks.
 public/lifat
+

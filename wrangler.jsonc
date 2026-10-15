@@ -56,5 +56,9 @@
       "binding": "BACKUPS",
       "bucket_name": "lichess-backups"
     }
-  ]
+  ],
+  "build": {
+    "command": "node cloudflare/prepare-build-context.mjs"
+  }
 }
+
