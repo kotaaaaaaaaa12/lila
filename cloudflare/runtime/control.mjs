@@ -159,6 +159,7 @@ async function initialize(config) {
   `]);
   start('/opt/lichess/app/bin/lila', [
     '-Dconfig.file=/run/lichess/site.conf', '-Dplay.server.dir=/opt/lichess/app',
+    '-Dlogger.file=/run/lichess/logger.xml',
     '-Dplay.mode=prod', '-Dreactivemongo.api.bson.document.strict=false',
     '-J-Xms128m', '-J-Xmx2g', '-J-XX:ActiveProcessorCount=2',
   ], 'application', {cwd: '/opt/lichess/app'});

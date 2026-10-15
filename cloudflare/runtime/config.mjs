@@ -138,13 +138,24 @@ http {
   }
 }
 `;
-  return {app, socket, nginx};
+  const logger = `<configuration debug="false">
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date %-5level %logger{36} - %msg%n%ex{30}</pattern>
+    </encoder>
+  </appender>
+  <root level="INFO">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>
+`;
+  return {app, socket, nginx, logger};
 }
 
 export async function writeConfiguration(env) {
   const config = buildConfiguration(env);
   await mkdir('/run/lichess', {recursive: true});
-  for (const [name, contents] of [['site.conf', config.app], ['socket.conf', config.socket], ['nginx.conf', config.nginx]]) {
+  for (const [name, contents] of [['site.conf', config.app], ['socket.conf', config.socket], ['nginx.conf', config.nginx], ['logger.xml', config.logger]]) {
     await writeFile(`/run/lichess/${name}`, contents, {mode: 0o600});
   }
   return config;
