@@ -1,26 +1,60 @@
 {
-  "$schema": "./cloudflare/node_modules/wrangler/config-schema.json",
-  "name": "lichess",
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "lila",
   "main": "cloudflare/worker.mjs",
   "compatibility_date": "2026-10-14",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "workers_dev": true,
-  "observability": {"enabled": true},
+  "observability": {
+    "enabled": true
+  },
   "vars": {
     "PUBLIC_ORIGIN": "https://lichess.what-the-fuck.men",
     "BACKUP_INTERVAL_SECONDS": "60",
     "ENGINE_ENABLED": "true"
   },
-  "routes": [{"pattern": "lichess.what-the-fuck.men", "custom_domain": true}],
-  "containers": [{
-    "class_name": "LichessServer",
-    "image": "./cloudflare/Dockerfile",
-    "image_build_context": ".",
-    "instance_type": "standard-2",
-    "max_instances": 1,
-    "constraints": {"regions": ["APAC"]}
-  }],
-  "durable_objects": {"bindings": [{"name": "LICHESS", "class_name": "LichessServer"}]},
-  "migrations": [{"tag": "v1", "new_sqlite_classes": ["LichessServer"]}],
-  "r2_buckets": [{"binding": "BACKUPS", "bucket_name": "lichess-backups"}]
+  "routes": [
+    {
+      "pattern": "lichess.what-the-fuck.men",
+      "custom_domain": true
+    }
+  ],
+  "containers": [
+    {
+      "class_name": "LichessServer",
+      "image": "./cloudflare/Dockerfile",
+      "image_build_context": ".",
+      "instance_type": "standard-2",
+      "max_instances": 1,
+      "constraints": {
+        "regions": [
+          "APAC"
+        ]
+      }
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "LICHESS",
+        "class_name": "LichessServer"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "LichessServer"
+      ]
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BACKUPS",
+      "bucket_name": "lichess-backups"
+    }
+  ]
 }

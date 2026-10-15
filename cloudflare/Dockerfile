@@ -3,7 +3,7 @@ FROM node:24.20.0-bookworm-slim AS node
 FROM niklasf/fishnet:2.12.0 AS fishnet
 
 FROM eclipse-temurin:21-jdk-noble AS builder
-ENV DEBIAN_FRONTEND=noninteractive GIT_LFS_SKIP_SMUDGE=1
+ENV CI=true DEBIAN_FRONTEND=noninteractive GIT_LFS_SKIP_SMUDGE=1
 RUN apt-get update && apt-get install -y --no-install-recommends \
     bash ca-certificates curl git git-lfs python3 unzip libatomic1 libstdc++6 \
     && rm -rf /var/lib/apt/lists/*
